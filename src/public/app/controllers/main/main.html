@@ -1,0 +1,43 @@
+<div class="main">
+  <md-toolbar md-scroll-shrink>
+      <div class="md-toolbar-tools">Hot house</div>
+    </md-toolbar>
+     <md-content>
+       <canvas id="line" class="chart chart-line" chart-data="temperature.series()"
+chart-labels="temperature.labels()" chart-series="series" chart-options="options"
+chart-dataset-override="datasetOverride" chart-click="onClick">
+</canvas>
+
+{{temperatures.labels().length}}
+
+
+<!--
+       <canvas id="line" class="chart chart-line" chart-data="temperatures.series()"
+     chart-series="series"
+      >
+   </canvas> -->
+       <table class="temperatures" >
+         <thead>
+           <tr>
+             <th>Date</th>
+             <th>Temperature (°)</th>
+           </tr>
+         </thead>
+         <tbody>
+           <tr ng-repeat="temperature in temperature.list() | orderBy: '-createdAt'">
+             <td>
+               {{temperature.createdAt | date:'yyyy-MM-dd HH:mm:ss Z'}}
+             </td>
+             <td>
+               {{temperature.temperature}}
+             </td>
+           </tr>
+         </tbody>
+
+       </table>
+
+    </md-content>
+
+
+
+</div>
