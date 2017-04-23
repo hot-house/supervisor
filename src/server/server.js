@@ -33,33 +33,35 @@ app.use(bodyParser.urlencoded({
   extended: true
 }))
 app.use(bodyParser.json())
-app.post('/temperature/:value', (req, res) => {
-  winston.info('temperature got', { temperature: req.params.value, typeof: typeof req.params.value })
+app.post('/data', (req, res) => {
+  winston.info('got extract', { temperature: req.body.temperature, luminosity: req.body.luminosity })
 
   Extract.create({
-    temperature: parseFloat(req.params.value)
+    temperature: parseFloat(req.body.temperature),
+    luminosity: parseInt(req.body.luminosity)
   }).catch((e) => {
     res.send('ko')
-    winston.error('error while saving temperature', { error: e })
+    winston.error('error while saving extract', { error: e })
   }).then((extract) => {
-    winston.info('temperature saved')
+    winston.info('extract saved')
     res.send('ok')
-    io.to('temperature').emit('/temperature/add', {
+    io.to('extract').emit('/extract/add', {
       createdAt: extract.createdAt,
-      temperature: extract.temperature
+      temperature: extract.temperature,
+      luminosity: extract.luminosity
     })
   })
 })
 
 io.on('connection', (socket) => {
   winston.info('connection established')
-  socket.on('/temperature/list', () => {
+  socket.on('/extract/list', () => {
     Extract.findAll({
-      attributes: [ 'createdAt', 'id', 'temperature' ],
+      attributes: [ 'createdAt', 'id', 'temperature', 'luminosity' ],
       raw: true
     }).then((extracts) => {
-      socket.emit('/temperature/list/response', extracts)
-      socket.join('temperature')
+      socket.emit('/extract/list/response', extracts)
+      socket.join('extract')
     })
   })
 })

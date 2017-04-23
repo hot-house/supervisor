@@ -6,19 +6,50 @@
 		<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
 		<link href='/styles/style.css' rel='stylesheet' />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-		<title>Hot house</title>
+		<title>Green house</title>
 	</head>
 
   <body>
-    <div class="app" ng-view ng-app="hotHouse"></div>
+    <div class="app" ng-cloak ng-app="greenHouse" layout="row">
+      <md-sidenav
+          class="md-sidenav-left"
+          md-component-id="left"
+          md-is-locked-open="$mdMedia('gt-md')"
+          md-whiteframe="4"
+          layout="column">
+          <md-toolbar>
+              <div class="md-toolbar-tools">
+
+                <h1 flex>Green House</h1>
+              </div>
+            </md-toolbar>
+
+            <div flex layout="column">
+          <a href="#/graph" class="md-button" ng-class="{'md-primary': true}">
+            Graph
+          </a>
+          <a href="#/data" class="md-button" ng-class="{'md-primary': true}">
+            Data
+          </a>
+        </div>
+        <!-- <md-button>
+          Preferences
+        </md-button> -->
+        </md-sidenav>
+
+
+        <md-content flex ng-view>
+        </md-content>
+        </div>
   </body>
 
     <script src="/socket.io/socket.io.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.4/semantic.min.js"></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-cookies.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-route.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-sanitize.min.js"></script>
@@ -30,7 +61,9 @@
 
     <script src="/app/app.js"></script>
     <script src="/app/controllers/main/main.js"></script>
+		<script src="/app/controllers/welcome/welcome.js"></script>
+    <script src="/app/controllers/data/data.js"></script>
 		<script src="/app/services/socket.js"></script>
-		<script src="/app/services/temperature.js"></script>
+		<script src="/app/services/extract.js"></script>
 
 </html>

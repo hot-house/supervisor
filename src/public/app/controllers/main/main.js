@@ -1,15 +1,15 @@
-app.controller('MainCtrl', function ($scope, temperature) {
+app.controller('MainCtrl', function ($scope, extract) {
 
-  $scope.temperature = temperature
+  $scope.extract = extract
 
   // $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
 
   // $scope.series = [ 'Arduino 1' ]
-  $scope.series = ['Arduino 1'];
+  $scope.series = ['temperature', 'luminosity'];
    $scope.onClick = function (points, evt) {
      console.log(points, evt);
    };
-   $scope.datasetOverride = [{ yAxisID: 'y-axis-1' }];
+   $scope.datasetOverride = [{ yAxisID: 'y-axis-1' }, { yAxisID: 'y-axis-2' }];
    $scope.options = {
      scales: {
        yAxes: [
@@ -21,9 +21,14 @@ app.controller('MainCtrl', function ($scope, temperature) {
           //  ticks: {
           //       suggestedMin: 65,    // minimum will be 0, unless there is a lower value.
           //   }
-         }
+        },
+        {
+         id: 'y-axis-2',
+         type: 'linear',
+         display: true,
+         position: 'right'
+       }
        ]
      }
-   };
-
+   }
 })

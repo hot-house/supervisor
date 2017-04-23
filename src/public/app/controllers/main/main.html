@@ -1,12 +1,29 @@
 <div class="main">
-  <md-toolbar md-scroll-shrink>
-      <div class="md-toolbar-tools">Hot house</div>
+  <div class="graph">
+    <canvas id="line" class="chart chart-line" chart-data="extract.series()"
+     chart-labels="extract.labels()" chart-series="series" chart-options="options"
+     chart-dataset-override="datasetOverride" chart-click="onClick">
+     </canvas>
+  </div>
+
+
+
+
+
+<!--
+  <md-toolbar>
+      <div class="md-toolbar-tools">
+
+        <h1 flex>Hot house</h1>
+        <md-button aria-label="Measures">
+          Measures
+        </md-button>
+      </div>
     </md-toolbar>
-     <md-content>
-       <canvas id="line" class="chart chart-line" chart-data="temperature.series()"
-        chart-labels="temperature.labels()" chart-series="series" chart-options="options"
-        chart-dataset-override="datasetOverride" chart-click="onClick">
-        </canvas>
+     <md-content flex>
+
+
+        <md-button class="md-raised">Button</md-button>
 
        <table class="temperatures" >
          <thead>
@@ -28,7 +45,7 @@
 
        </table>
 
-    </md-content>
+    </md-content> -->
 
 
 
