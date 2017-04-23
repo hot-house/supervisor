@@ -54,16 +54,6 @@ app.post('/temperature/:value', (req, res) => {
 io.on('connection', (socket) => {
   winston.info('connection established')
   socket.on('/temperature/list', () => {
-    // socket.emit('/temperature/list/response', [
-    //   {
-    //     createdAt: new Date(),
-    //     temperature: 10
-    //   },
-    //   {
-    //     createdAt: new Date(),
-    //     temperature: 20
-    //   }
-    // ])
     Extract.findAll({
       attributes: [ 'createdAt', 'id', 'temperature' ],
       raw: true
