@@ -1,0 +1,31 @@
+<div class="data">
+
+
+
+       <table class="temperatures" >
+         <thead>
+           <tr>
+             <th>Date</th>
+             <th>Temperature (°C)</th>
+             <th>Luminosity</th>
+
+           </tr>
+         </thead>
+         <tbody>
+           <tr ng-animate="'animate'" ng-repeat="extract in extract.list() | orderBy: '-createdAt'">
+             <td>
+               {{extract.createdAt | date:'yyyy-MM-dd HH:mm:ss Z'}}
+             </td>
+             <td>
+               {{extract.temperature}}
+             </td>
+             <td>
+               {{extract.luminosity}}
+             </td>
+           </tr>
+         </tbody>
+
+       </table>
+
+
+</div>
