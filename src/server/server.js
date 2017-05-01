@@ -34,11 +34,12 @@ app.use(bodyParser.urlencoded({
 }))
 app.use(bodyParser.json())
 app.post('/data', (req, res) => {
-  winston.info('got extract', { temperature: req.body.temperature, luminosity: req.body.luminosity })
+  winston.info('got extract', { temperature: req.body.temperature, luminosity: req.body.luminosity, voltage: req.body.tension })
 
   Extract.create({
     temperature: parseFloat(req.body.temperature),
-    luminosity: parseInt(req.body.luminosity)
+    luminosity: parseInt(req.body.luminosity),
+    voltage: parseFloat(req.body.tension),
   }).catch((e) => {
     res.send('ko')
     winston.error('error while saving extract', { error: e })
@@ -48,7 +49,8 @@ app.post('/data', (req, res) => {
     io.to('extract').emit('/extract/add', {
       createdAt: extract.createdAt,
       temperature: extract.temperature,
-      luminosity: extract.luminosity
+      luminosity: extract.luminosity,
+      voltage: extract.voltage
     })
   })
 })
@@ -57,7 +59,7 @@ io.on('connection', (socket) => {
   winston.info('connection established')
   socket.on('/extract/list', () => {
     Extract.findAll({
-      attributes: [ 'createdAt', 'id', 'temperature', 'luminosity' ],
+      attributes: [ 'createdAt', 'id', 'temperature', 'luminosity', 'voltage' ],
       raw: true
     }).then((extracts) => {
       socket.emit('/extract/list/response', extracts)

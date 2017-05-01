@@ -8,7 +8,7 @@
              <th>Date</th>
              <th>Temperature (°C)</th>
              <th>Luminosity</th>
-
+             <th>Voltage (Vcc)</th>
            </tr>
          </thead>
          <tbody>
@@ -21,6 +21,9 @@
              </td>
              <td>
                {{extract.luminosity}}
+             </td>
+             <td ng-class="{'red': extract.voltage <= 5}">
+               {{extract.voltage}}
              </td>
            </tr>
          </tbody>
