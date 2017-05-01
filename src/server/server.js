@@ -34,12 +34,12 @@ app.use(bodyParser.urlencoded({
 }))
 app.use(bodyParser.json())
 app.post('/data', (req, res) => {
-  winston.info('got extract', { temperature: req.body.temperature, luminosity: req.body.luminosity, voltage: req.body.tension })
+  winston.info('got extract', { temperature: req.body.temperature, luminosity: req.body.luminosity, voltage: req.body.voltage })
 
   Extract.create({
     temperature: parseFloat(req.body.temperature),
     luminosity: parseInt(req.body.luminosity),
-    voltage: parseFloat(req.body.tension),
+    voltage: parseFloat(req.body.voltage),
   }).catch((e) => {
     res.send('ko')
     winston.error('error while saving extract', { error: e })
